@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArduinoSerial", "ArduinoSerial\ArduinoSerial.vcxproj", "{CEF57CED-C17A-4E1C-998B-56B13896738B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEF57CED-C17A-4E1C-998B-56B13896738B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CEF57CED-C17A-4E1C-998B-56B13896738B}.Debug|Win32.Build.0 = Debug|Win32
+		{CEF57CED-C17A-4E1C-998B-56B13896738B}.Release|Win32.ActiveCfg = Release|Win32
+		{CEF57CED-C17A-4E1C-998B-56B13896738B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
