@@ -102,7 +102,7 @@ SerialWindows::SerialWindows(const char *portName, int baudrate)
                  //If everything went fine we're connected
                  _connected = true;
                  //We wait 2s as the arduino board will be reseting
-				 //Sleep(2000);
+				 Sleep(ARDUINO_WAIT_TIME);
                  //SDL_Delay(ARDUINO_WAIT_TIME);
              }
         }
