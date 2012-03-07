@@ -7,7 +7,7 @@ using namespace std;
 #include <windows.h>
 #endif
 
-SerialWindows::SerialWindows(const char *portName)
+SerialWindows::SerialWindows(const char *portName, int baudrate)
 :Serial(portName)
 {
     //Try to connect to the given port throuh CreateFile
@@ -54,7 +54,42 @@ SerialWindows::SerialWindows(const char *portName)
         else
         {
             //Define serial connection parameters for the arduino board
-            dcbSerialParams.BaudRate=CBR_57600;
+			switch(baudrate)
+			{        
+				case 300:
+		            dcbSerialParams.BaudRate=CBR_300; 
+					break;
+				case 1200:
+		            dcbSerialParams.BaudRate=CBR_1200; 
+					break;
+				case 2400:
+		            dcbSerialParams.BaudRate=CBR_2400; 
+					break;
+				case 4800:
+		            dcbSerialParams.BaudRate=CBR_4800; 
+					break;
+				case 9600:
+		            dcbSerialParams.BaudRate=CBR_9600; 
+					break;
+				case 14400:
+		            dcbSerialParams.BaudRate=CBR_14400; 
+					break;
+				case 19200:
+		            dcbSerialParams.BaudRate=CBR_19200; 
+					break;
+				case 38400:
+		            dcbSerialParams.BaudRate=CBR_38400; 
+					break;
+				case 57600:
+		            dcbSerialParams.BaudRate=CBR_57600; 
+					break;
+				case 115200:
+		            dcbSerialParams.BaudRate=CBR_115200; 
+					break;
+				default:
+					dcbSerialParams.BaudRate=CBR_57600; 
+					break;
+			}
             dcbSerialParams.ByteSize=8;
             dcbSerialParams.StopBits=ONESTOPBIT;
             dcbSerialParams.Parity=NOPARITY;

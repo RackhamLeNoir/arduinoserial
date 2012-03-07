@@ -1,6 +1,6 @@
 #include "Serial.hpp"
 
-Serial::Serial(const char *)
+Serial::Serial(const char *, int baudrate)
 :_connected(false)
 {
 }

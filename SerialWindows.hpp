@@ -9,7 +9,7 @@ class SerialWindows : public Serial
 {
     public:
         //Initialize Serial communication with the given COM port
-        __declspec(dllexport) SerialWindows(const char *portName);
+        __declspec(dllexport) SerialWindows(const char *portName, int baudrate = 57600);
         //Close the connection
         //NOTA: for some reason you can't connect again before exiting
         //the program and running it again

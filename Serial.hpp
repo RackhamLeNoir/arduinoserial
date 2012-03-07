@@ -7,7 +7,8 @@ class Serial
 {
     public:
         //Initialize Serial communication with the given COM port
-        __declspec(dllexport) Serial(const char *portName);
+		//baudrate among 300 1200 2400 4800 9600 14400 19200 38400 57600 115200
+        __declspec(dllexport) Serial(const char *portName, int baudrate = 57600);
 
         //Close the connection
         //NOTA: for some reason you can't connect again before exiting
