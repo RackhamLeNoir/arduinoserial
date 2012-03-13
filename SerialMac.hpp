@@ -1,36 +1,33 @@
-#ifndef _SERIAL_
-#define _SERIAL_
+#ifndef _SERIALMAC_
+#define _SERIALMAC_
 
-#define ARDUINO_WAIT_TIME 500
+#include "Serial.hpp"
 
-class Serial
+class SerialMac : public Serial
 {
     public:
         //Initialize Serial communication with the given COM port
-		//baudrate among 300 1200 2400 4800 9600 14400 19200 38400 57600 115200
-        Serial(const char *portName, int baudrate = 57600);
-
+        SerialMac(const char *portName, int baudrate = 57600);
         //Close the connection
         //NOTA: for some reason you can't connect again before exiting
         //the program and running it again
-        virtual ~Serial();
-
+        ~SerialMac();
         //Read data in a buffer, if nbChar is greater than the
         //maximum number of bytes available, it will return only the
         //bytes available. The function return -1 when nothing could
         //be read, the number of bytes actually read.
-        virtual int ReadData(void *buffer, unsigned int nbChar)=0;
-
+        int ReadData(void *buffer, unsigned int nbChar);
         //Writes data from a buffer through the Serial connection
         //return true on success.
-        virtual bool WriteData(void *buffer, unsigned int nbChar)=0;
+        bool WriteData(void *buffer, unsigned int nbChar);
 
-        //Check if we are actually connected
-		bool IsConnected() { return _connected; }
 
-    protected:
-        //Connection status
-        bool _connected;
+    private:
+        //Serial comm handler
+        int _hSerial;
+/*        //Get various information about the connection
+        COMSTAT _status;
+        //Keep track of last error
+        DWORD _errors;*/
 };
-
 #endif
