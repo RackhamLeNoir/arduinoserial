@@ -159,14 +159,14 @@ bool SerialWindows::WriteData(void *buffer, unsigned int nbChar)
     //Try to write the buffer on the Serial port
     if(!WriteFile(_hSerial, buffer, nbChar, &bytesSend, 0))
     {
-        //In case it don't work get comm error and return false
+        //In case it doesn't work get comm error and return false
         ClearCommError(_hSerial, &_errors, &_status);
 
         return false;
     }
     else
 	{
-        ClearCommError(_hSerial, &_errors, &_status);
+        //ClearCommError(_hSerial, &_errors, &_status);
 /*		if(!FlushFileBuffers(_hSerial))
 			cout << "ERROR while flushing" << endl;*/
 /*		stringstream s;
