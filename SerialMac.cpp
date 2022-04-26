@@ -29,7 +29,10 @@ SerialMac::SerialMac(const char *portName, int baudrate)
     
     //Try to get the current
     if (tcgetattr(_hSerial, &serialParams) < 0)
+    {
 		throw "Cannot get COM port properties";
+
+    }
     
     tcflush(_hSerial, TCIFLUSH);
     
@@ -40,57 +43,57 @@ SerialMac::SerialMac(const char *portName, int baudrate)
     {        
         case 300:
             cfsetispeed(&serialParams, B300);
-            cfsetispeed(&serialParams, B300);
+            cfsetospeed(&serialParams, B300);
             serialParams.c_cflag |= B300; 
             break;
         case 1200:
             cfsetispeed(&serialParams, B1200);
-            cfsetispeed(&serialParams, B1200);
+            cfsetospeed(&serialParams, B1200);
             serialParams.c_cflag |= B1200; 
             break;
         case 2400:
             cfsetispeed(&serialParams, B2400);
-            cfsetispeed(&serialParams, B2400);
+            cfsetospeed(&serialParams, B2400);
             serialParams.c_cflag |= B2400; 
             break;
         case 4800:
             cfsetispeed(&serialParams, B4800);
-            cfsetispeed(&serialParams, B4800);
+            cfsetospeed(&serialParams, B4800);
             serialParams.c_cflag |= B4800; 
             break;
         case 9600:
             cfsetispeed(&serialParams, B9600);
-            cfsetispeed(&serialParams, B9600);
+            cfsetospeed(&serialParams, B9600);
             serialParams.c_cflag |= B9600; 
             break;
         case 14400:
             cfsetispeed(&serialParams, B14400);
-            cfsetispeed(&serialParams, B14400);
+            cfsetospeed(&serialParams, B14400);
             serialParams.c_cflag |= B14400; 
             break;
         case 19200:
             cfsetispeed(&serialParams, B19200);
-            cfsetispeed(&serialParams, B19200);
+            cfsetospeed(&serialParams, B19200);
             serialParams.c_cflag |= B19200; 
             break;
         case 38400:
             cfsetispeed(&serialParams, B38400);
-            cfsetispeed(&serialParams, B38400);
+            cfsetospeed(&serialParams, B38400);
             serialParams.c_cflag |= B38400; 
             break;
         case 57600:
             cfsetispeed(&serialParams, B57600);
-            cfsetispeed(&serialParams, B57600);
+            cfsetospeed(&serialParams, B57600);
             serialParams.c_cflag |= B57600; 
             break;
         case 115200:
             cfsetispeed(&serialParams, B115200);
-            cfsetispeed(&serialParams, B115200);
+            cfsetospeed(&serialParams, B115200);
             serialParams.c_cflag |= B115200; 
             break;
         default:
             cfsetispeed(&serialParams, B57600);
-            cfsetispeed(&serialParams, B57600);
+            cfsetospeed(&serialParams, B57600);
             serialParams.c_cflag |= B57600; 
             break;
     }
@@ -100,13 +103,18 @@ SerialMac::SerialMac(const char *portName, int baudrate)
     serialParams.c_cflag &= ~CSTOPB;
     
     if (tcsetattr(_hSerial, TCSANOW, &serialParams) < 0)
-        throw "ERROR: Could not set Serial Port parameters";
+    {
+        char buffer[256];
+        sprintf(buffer, "ERROR: Could not set Serial Port parameters port:%s error:%d %s\n", portName, errno, strerror(errno));
+        cerr << buffer << endl;
+        throw buffer;
+    }
     else
     {
         //If everything went fine we're connected
         _connected = true;
         //We wait 2s as the arduino board will be reseting
-        sleep(ARDUINO_WAIT_TIME);
+        //sleep(ARDUINO_WAIT_TIME);
         //SDL_Delay(ARDUINO_WAIT_TIME);
     }
 }
